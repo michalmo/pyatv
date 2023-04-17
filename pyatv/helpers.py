@@ -72,9 +72,8 @@ def get_unique_id(  # pylint: disable=too-many-return-statements
         return properties.get("deviceid")
     if service_type == COMPANION_SERVICE:
         # Apple TV devices on tvOS 16 (maybe earlier) have a static rpMRtID
-        # identifier. For other devices use rpBA which periodically changes but is
-        # still useful.
-        return properties.get("rpmrtid") or properties.get("rpba")
+        # identifier.
+        return properties.get("rpmrtid")
     if service_type == RAOP_SERVICE:
         split = service_name.split("@", maxsplit=1)
 
