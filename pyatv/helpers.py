@@ -19,7 +19,7 @@ HSCP_SERVICE: str = "_hscp._tcp.local"
 async def auto_connect(
     handler: Callable[[pyatv.interface.AppleTV], None],
     timeout: int = 5,
-    not_found: Callable[[], None] = None,
+    not_found: Optional[Callable[[], None]] = None,
     loop: Optional[asyncio.AbstractEventLoop] = None,
 ) -> None:
     """Connect to first discovered device.
@@ -99,5 +99,4 @@ async def is_streamable(filename: str) -> bool:
         await loop.run_in_executor(None, miniaudio.get_file_info, filename)
     except Exception:
         return False
-    else:
-        return True
+    return True
