@@ -205,10 +205,14 @@ class CompanionAppleTVProxy(
             MutableService(None, Protocol.Companion, port, {}, credentials=credentials),
         )
         # CompanionProtocol sets listener, override it now
-        self.connection.listener = self
+        self._setup_listener(self)
         self.system_info_xid = None
         self._receive_event: asyncio.Event = asyncio.Event()
         self._receive_task: Optional[asyncio.Future] = None
+
+    def _setup_listener(self, listener: CompanionConnectionListener) -> None:
+        """Set the CompanionConnectionListener in a way that doesn't break pylint."""
+        self.connection.listener = listener
 
     async def start(self) -> None:
         """Start the proxy instance."""
